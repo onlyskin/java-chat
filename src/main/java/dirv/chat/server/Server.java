@@ -31,7 +31,7 @@ public class Server implements Runnable {
     
     private static List<Command> buildCommands(List<String> users, MessageRepository messageRepository) {
         return Arrays.asList(
-                new RegisterUserCommand(users),
+                new RegisterUserCommand(messageRepository, users),
                 new SaveMessageCommand(messageRepository, users),
                 new RelayMessagesCommand(messageRepository),
                 new UnknownCommand());

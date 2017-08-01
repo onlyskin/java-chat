@@ -54,10 +54,10 @@ public class ServerTest {
     }
     
     @Test
-    public void doNotSendAMessageOnUserRegistration() throws IOException {
+    public void SendAMessageOnUserRegistration() throws IOException {
         receiveClientMessage("1", "Donald");
         startListening();
-        assertEquals(0, messageRepository.getMessages().size());
+        assertEquals(1, messageRepository.getMessages().size());
     }
     
     @Test
@@ -99,7 +99,7 @@ public class ServerTest {
         SocketStub lastClient = receiveClientMessage("3", "0");
         startListening();
         List<String> expected = Arrays.asList(
-                "-1", "Donald", "Hello, world!");
+                "-1", "system", "Donald joined", "-1", "Donald", "Hello, world!");
         assertEqualsLines(expected, lastClient.getOutput());
     }
     
