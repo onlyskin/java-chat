@@ -8,6 +8,8 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import dirv.chat.server.MessageWatcherSpy;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import dirv.chat.Message;
@@ -23,6 +25,7 @@ public class SaveMessageCommandTest extends CommandTest {
     private final List<String> users = new ArrayList<String>();
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
     private MessageRepositorySpy messageRepository = new MessageRepositorySpy();
+    private MessageWatcherSpy messageWatcher = new MessageWatcherSpy();
     
     @Test
     public void savesMessage() throws IOException {
@@ -46,9 +49,16 @@ public class SaveMessageCommandTest extends CommandTest {
         assertEquals("ERROR" + LINE_SEPARATOR, output.toString());
         assertEquals(0, messageRepository.getMessages().size());
     }
-    
+
+    @Test
+    public void notifiesMessageWatcherOfMessage() throws Exception {
+        users.add("Donald");
+        executeCommand("Donald" + LINE_SEPARATOR + "Hello, world!");
+        assertTrue(messageWatcher.getReceived());
+    }
+
     protected Command command() {
-        return new SaveMessageCommand(messageRepository, users);
+        return new SaveMessageCommand(messageRepository, users, messageWatcher);
     }
     
     protected String input() {

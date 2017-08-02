@@ -22,17 +22,25 @@ public class Server implements Runnable {
     private final ServerSocketFactory serverSocketFactory;
     private final List<Command> commands;
     private final int port;
+    private final MessageWatcher messageWatcher;
     
-    public Server(ServerSocketFactory serverSocketFactory, List<String> users, MessageRepository messageRepository, int port) {
+    public Server(ServerSocketFactory serverSocketFactory,
+                  List<String> users,
+                  MessageRepository messageRepository,
+                  int port,
+                  MessageWatcher messageWatcher) {
         this.serverSocketFactory = serverSocketFactory;
         this.port = port;
-        commands = buildCommands(users, messageRepository);
+        this.messageWatcher = messageWatcher;
+        commands = buildCommands(users, messageRepository, messageWatcher);
     }
     
-    private static List<Command> buildCommands(List<String> users, MessageRepository messageRepository) {
+    private static List<Command> buildCommands(List<String> users,
+                                               MessageRepository messageRepository,
+                                               MessageWatcher messageWatcher) {
         return Arrays.asList(
                 new RegisterUserCommand(messageRepository, users),
-                new SaveMessageCommand(messageRepository, users),
+                new SaveMessageCommand(messageRepository, users, messageWatcher),
                 new RelayMessagesCommand(messageRepository),
                 new UnknownCommand());
     }

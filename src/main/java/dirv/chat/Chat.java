@@ -10,6 +10,7 @@ import dirv.chat.client.MessageSender;
 import dirv.chat.client.NetSocketFactory;
 import dirv.chat.client.ServerListener;
 import dirv.chat.server.CappedMessageRepository;
+import dirv.chat.server.MessageWatcher;
 import dirv.chat.server.NetServerSocketFactory;
 import dirv.chat.server.Server;
 
@@ -25,7 +26,8 @@ public class Chat {
             return new Server(new NetServerSocketFactory(),
                     new ArrayList<String>(),
                     new CappedMessageRepository(new Clock(), 200),
-                    port);
+                    port,
+                    new MessageWatcher());
         }
     };
 

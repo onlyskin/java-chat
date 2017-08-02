@@ -21,6 +21,7 @@ public class ServerTest {
     private ServerSocketFactoryStub serverSocketFactory = new ServerSocketFactoryStub();
     private List<String> users = new ArrayList<String>();
     private MessageRepositorySpy messageRepository = new MessageRepositorySpy();
+    private MessageWatcherSpy messageWatcher = new MessageWatcherSpy();
 
     @Test
     public void listensOnSpecifiedPort() throws IOException {
@@ -120,7 +121,7 @@ public class ServerTest {
     }
 
     private void startListening(int port) {
-        Server server = new Server(serverSocketFactory, users, messageRepository, port);
+        Server server = new Server(serverSocketFactory, users, messageRepository, port, messageWatcher);
         server.run();
     }
 
