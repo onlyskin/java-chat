@@ -21,13 +21,13 @@ public class Hangman {
         return output;
     }
 
-    public void playGuess(String guess) {
+    private void playGuess(String guess) {
         if (answer.contains(guess)) {
             guesses.add(guess);
         }
     }
 
-    public String getProgress() {
+    private String getProgress() {
         String output = "";
         for (int i=0; i<answer.length(); i++) {
             String currentChar = Character.toString(answer.charAt(i));
@@ -41,7 +41,7 @@ public class Hangman {
         return output.toUpperCase();
     }
 
-    public boolean gameWon() {
+    private boolean gameWon() {
         return getProgress().toLowerCase().equals(answer.toLowerCase());
     }
 }
