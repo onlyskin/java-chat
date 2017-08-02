@@ -3,7 +3,8 @@ package dirv.chat.server;
 public class HangmanBotSpy extends HangmanBot {
     public boolean received;
 
-    public HangmanBotSpy() {
+    public HangmanBotSpy(MessageRepository messageRepository, Hangman hangman) {
+        super(messageRepository, hangman);
         this.received = false;
     }
 

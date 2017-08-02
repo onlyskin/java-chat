@@ -26,7 +26,9 @@ public class SaveMessageCommandTest extends CommandTest {
     private final List<String> users = new ArrayList<String>();
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
     private MessageRepositorySpy messageRepository = new MessageRepositorySpy();
-    private MessageWatcherSpy messageWatcher = new MessageWatcherSpy(new HangmanBotSpy());
+    private MessageWatcherSpy messageWatcher = new MessageWatcherSpy(
+            new HangmanBotSpy(messageRepository, new HangmanSpy())
+    );
     
     @Test
     public void savesMessage() throws IOException {

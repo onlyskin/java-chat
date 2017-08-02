@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import dirv.chat.server.MessageRepository;
 import dirv.chat.server.MessageWatcher;
@@ -30,6 +31,11 @@ public class SaveMessageCommand extends RecognizedCommand {
         }
         String message = reader.readLine();
         messageRepository.receiveMessage(user, message);
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         messageWatcher.receiveMessage(message);
         printWriter.println("OK");
     }

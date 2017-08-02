@@ -1,5 +1,6 @@
 package dirv.chat.server;
 
+import dirv.chat.server.commands.HangmanSpy;
 import org.junit.Test;
 
 import dirv.chat.Message;
@@ -21,7 +22,9 @@ public class ServerTest {
     private ServerSocketFactoryStub serverSocketFactory = new ServerSocketFactoryStub();
     private List<String> users = new ArrayList<String>();
     private MessageRepositorySpy messageRepository = new MessageRepositorySpy();
-    private MessageWatcherSpy messageWatcher = new MessageWatcherSpy(new HangmanBotSpy());
+    private MessageWatcherSpy messageWatcher = new MessageWatcherSpy(
+            new HangmanBotSpy(messageRepository, new HangmanSpy())
+    );
 
     @Test
     public void listensOnSpecifiedPort() throws IOException {

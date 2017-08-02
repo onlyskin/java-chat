@@ -20,11 +20,15 @@ public class Chat {
     private static final ServerFactory realServerFactory = new ServerFactory() {
         @Override
         public Runnable build(int port) {
+            CappedMessageRepository cappedMessageRepository = new CappedMessageRepository(new Clock(), 200);
             return new Server(new NetServerSocketFactory(),
                     new ArrayList<String>(),
-                    new CappedMessageRepository(new Clock(), 200),
+                    cappedMessageRepository,
                     port,
-                    new MessageWatcher(new HangmanBot()));
+                    new MessageWatcher(
+                            new HangmanBot(cappedMessageRepository, new Hangman())
+                    )
+            );
         }
     };
 
