@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import dirv.chat.server.HangmanBotSpy;
 import dirv.chat.server.MessageWatcherSpy;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -25,7 +26,7 @@ public class SaveMessageCommandTest extends CommandTest {
     private final List<String> users = new ArrayList<String>();
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
     private MessageRepositorySpy messageRepository = new MessageRepositorySpy();
-    private MessageWatcherSpy messageWatcher = new MessageWatcherSpy();
+    private MessageWatcherSpy messageWatcher = new MessageWatcherSpy(new HangmanBotSpy());
     
     @Test
     public void savesMessage() throws IOException {

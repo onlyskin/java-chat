@@ -1,10 +1,9 @@
 package dirv.chat.server;
 
-public class MessageWatcherSpy extends MessageWatcher {
+public class HangmanBotSpy extends HangmanBot {
     public boolean received;
 
-    public MessageWatcherSpy(HangmanBot hangmanBot) {
-        super(hangmanBot);
+    public HangmanBotSpy() {
         this.received = false;
     }
 

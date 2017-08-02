@@ -1,8 +1,13 @@
 package dirv.chat.server;
 
 public class MessageWatcher {
-    public MessageWatcher() {}
+    private final HangmanBot hangmanBot;
 
-    public void receiveMessage(String Message) {
+    public MessageWatcher(HangmanBot hangmanBot) {
+        this.hangmanBot = hangmanBot;
+    }
+
+    public void receiveMessage(String message) {
+        hangmanBot.receiveMessage(message);
     }
 }

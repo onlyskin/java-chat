@@ -21,7 +21,7 @@ public class ServerTest {
     private ServerSocketFactoryStub serverSocketFactory = new ServerSocketFactoryStub();
     private List<String> users = new ArrayList<String>();
     private MessageRepositorySpy messageRepository = new MessageRepositorySpy();
-    private MessageWatcherSpy messageWatcher = new MessageWatcherSpy();
+    private MessageWatcherSpy messageWatcher = new MessageWatcherSpy(new HangmanBotSpy());
 
     @Test
     public void listensOnSpecifiedPort() throws IOException {
